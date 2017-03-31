@@ -1,6 +1,7 @@
 package org.javacream.address.api;
 
-public class Address {
+
+public class Address{
 
 	private String city, street;
 

@@ -1,11 +1,18 @@
 package org.javacream.address.test;
 
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import org.javacream.address.api.Address;
 import org.javacream.address.api.AddressService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -15,7 +22,24 @@ public class AddressServiceTest {
 	
 	@Autowired
 	private AddressService addressService;
-
+	@Autowired
+//	private JdbcTemplate jdbcTemplate;
+//	@Before public void init(){
+//		jdbcTemplate.execute(new StatementCallback<String>() {
+//
+//			@Override
+//			public String doInStatement(Statement statement) throws SQLException, DataAccessException {
+//				try{
+//				statement.executeUpdate("create table egal  (col_message varchar(255))");
+//				}
+//				catch(SQLException e){
+//					//OK, Tabelle existiert
+//				}
+//				return "OK";
+//			}
+//		});
+//
+//	}
 	@Test public void createAddresses(){
 		Assert.assertTrue(addressService.createAddress("München", "Marienplatz"));
 		Assert.assertFalse(addressService.createAddress("Mönchen", "Marienplatz"));
