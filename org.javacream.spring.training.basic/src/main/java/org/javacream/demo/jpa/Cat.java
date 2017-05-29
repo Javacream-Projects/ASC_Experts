@@ -6,41 +6,60 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-@Entity
+@Entity(name="CatEntity")
 @Table(name="CATS")
-public class Cat{
-	
-	@Column(name="COL_CATNAME", length=20, unique=true)
+public class Cat {
+
 	private String name;
-
-
-	//@Transient
+	
+	@Transient
 	private double weight;
-
+	@Column(name="FUR")
+	private String furColor;
+	public Cat(String name, double weight, String furColor) {
+		super();
+		this.name = name;
+		this.weight = weight;
+		this.furColor = furColor;
+	}
 	public double getWeight() {
 		return weight;
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
+	public String getFurColor() {
+		return furColor;
+	}
+	public void setFurColor(String furColor) {
+		this.furColor = furColor;
+	}
 	public String getName() {
 		return name;
 	}
-	public Cat(String name, double weight) {
-		super();
-		this.name = name;
-		this.weight = weight;
-	}
 	@Override
 	public String toString() {
-		return "Cat [name=" + name + ", weight=" + weight + ", catId=" + catId
-				+ ", toString()=" + super.toString() + "]";
+		return "Cat [name=" + name + ", weight=" + weight + ", furColor=" + furColor + ", catId=" + catId + "]";
+	}
+	
+	public void annoy(){
+		System.out.println("Meauw...");
+	}
+	//######## JPA Only ########
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long catId;
+	
+	Cat(){
+		
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((furColor == null) ? 0 : furColor.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(weight);
@@ -56,32 +75,20 @@ public class Cat{
 		if (getClass() != obj.getClass())
 			return false;
 		Cat other = (Cat) obj;
+		if (furColor == null) {
+			if (other.furColor != null)
+				return false;
+		} else if (!furColor.equals(other.furColor))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (Double.doubleToLongBits(weight) != Double
-				.doubleToLongBits(other.weight))
+		if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight))
 			return false;
 		return true;
 	}
-	
-	public void annoy(){
-		//...
-	}
-	
-	
-	//++++++++++++++++++   JPA
-	
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long catId;
-	
-	
-	@SuppressWarnings("unused")
-	private Cat(){}
 	
 	
 }
