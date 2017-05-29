@@ -1,7 +1,5 @@
 package org.javacream.address.impl;
 
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +10,7 @@ import org.javacream.address.api.AddressService;
 import org.javacream.address.api.AddressValidator;
 import org.javacream.address.normalizer.api.Normalizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.stereotype.Service;
 
 @Service
